@@ -1,26 +1,26 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import PageDefault from '../../../components/PageDefault'
+import FormField from '../../../components/FormField'
 
 function RegisterCategory() {
-
-    const [categories, setCategories] = useState([])
-
+    
     const body = {
-        name: 'Na',
-        description: 'Te',
-        color: '#000000'
+    name: '',
+    description: '',
+    color: '#cc0000'
     }
 
+    const [categories, setCategories] = useState([])
     const [category, setCategory] = useState(body)
+    
+
 
     function setValue(key, value) {
         setCategory({
             ...category,
             [key]: value
         })
-
-        console.log(category)
     }
 
     function send(event) {
@@ -30,9 +30,13 @@ function RegisterCategory() {
             ...categories,
             category
         ])
+
+        setCategory(body)
     }
 
     function handleChange(event){
+        //const { getAttribute, value } = event.target
+
         setValue(
             event.target.getAttribute('name'),
             event.target.value
@@ -42,40 +46,33 @@ function RegisterCategory() {
     return (
         <PageDefault>
             <h1>
-                Página de Cadastro de Categoria: {body.name}
+                Página de Cadastro de Categoria: {category.name}
             </h1>
 
             <form>
-                <label>Nome da Categoria: </label>
-                
-                <div>
-                    <label>Nome: </label>
-                    <input
-                        name="name"
-                        type="text"
-                        value={body.name}
-                        onChange={handleChange}
-                    />
-                </div>
+                <FormField
+                    label="Nome da categoria: "
+                    name="name"
+                    type="text"
+                    value={category.name}
+                    onChange={handleChange}
+                />
 
-                <div>
-                    <label>Descrição: </label>
-                    <textarea
-                        name="description"
-                        value={body.description}
-                        onChange={handleChange}
-                    />
-                </div>
+                <FormField
+                    label="Descrição: "
+                    name="description"
+                    type="textarea"
+                    value={category.description}
+                    onChange={handleChange}
+                />
 
-                <div>
-                    <label>Cor:</label>
-                    <input
-                        name="color"
-                        type="color"
-                        value={body.color}
-                        onChange={handleChange}
-                    />
-                </div>
+                <FormField
+                    label="Cor: "
+                    name="color"
+                    type="color"
+                    value={category.color}
+                    onChange={handleChange}
+                />
 
                 <button type="submit" onClick={send}>Enviar</button>
             </form>
@@ -84,7 +81,7 @@ function RegisterCategory() {
                 {categories.map((categories, index) => {
                     return (
                         <li key={`${categories}-${index}`}>
-                            {categories}
+                            {categories.name}
                         </li>
                     )
                 })}
