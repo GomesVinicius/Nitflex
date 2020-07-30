@@ -4,6 +4,7 @@ import Menu from '../../components/Menu'
 import Footer from '../../components/Footer'
 import Carousel from '../../components/Carousel'
 
+import './styles.css'
 
 import dadosInicias from '../../data/dados_iniciais.json'
 
